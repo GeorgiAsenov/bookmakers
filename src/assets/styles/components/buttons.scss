@@ -1,0 +1,17 @@
+.v-button {
+    padding: 1.2rem 5rem;
+    font-size: 1.5rem;
+    color: $white;
+    text-transform: uppercase;
+    display: inline-flex;
+    cursor: pointer;
+    &.save {
+        background-color: $blue-color;
+    }
+    &.check {
+        background-color: $dark-blue-color;
+    } 
+    &.remove {
+        background-color: $red-color;
+    }
+}
