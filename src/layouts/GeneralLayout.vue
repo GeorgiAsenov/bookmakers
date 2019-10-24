@@ -1,13 +1,23 @@
 <template>
   <div class="container">
     <section class="options">
-      <button class="v-button save">save</button>
+      <button class="v-button save" @click="saveChanges">save</button>
       <div class="filter">
-        <multiselect v-model="value" :options="bookmakers" label="name" track-by="name"></multiselect>
-        <button class="v-button check">
+        <multiselect
+          v-model="value"
+          :options="allSelections"
+          :searchable="true"
+          :show-labels="false"
+          :allow-empty="false"
+          :reset-after="false"
+          placeholder='Choose bookmaker'
+          label="name"
+          >
+        </multiselect>
+        <button class="v-button check" @click="checkAll">
           <span class="check"></span> check all
         </button>
-        <button class="v-button remove">
+        <button class="v-button remove" @click="removeAll">
           <span class="close"></span> remove all
         </button>
       </div>
@@ -17,11 +27,16 @@
         v-model="bookmakers"
         @start="drag=true"
         @end="drag=false"
+        @change="moved"
         v-bind="dragOptions"
         class="list-group"
       >
         <transition-group type="transition" :name="!drag ? 'flip-list' : null">
-          <app-bookmaker v-for="bookmaker in filteredBookmakers" :key="bookmaker.id" :bookmaker="bookmaker"></app-bookmaker>
+          <app-bookmaker
+            v-for="bookmaker in filteredBookmakers"
+            :key="bookmaker.id"
+            :bookmaker="bookmaker"
+          ></app-bookmaker>
         </transition-group>
       </draggable>
     </section>
@@ -44,17 +59,33 @@ export default {
   },
   data () {
     return {
+      groupFilter: {
+        all: '--- SHOW ALL ---',
+        active: '--- SHOW ACTIVE ---',
+        inactive: '--- SHOW INACTIVE ---'
+      },
       drag: false,
       value: '',
+      allSelections: [{ name: '--- SHOW ALL ---' }, { name: '--- SHOW ACTIVE ---' }, { name: '--- SHOW INACTIVE ---' }, ...bookmakersJSON],
       bookmakers: bookmakersJSON
     }
   },
   computed: {
     filteredBookmakers () {
-      if (this.value === '') {
+      if (this.value === '' || this.value.name === this.groupFilter.all) {
         return this.bookmakers
+      } else if (this.value.name === this.groupFilter.inactive) {
+        return this.bookmakers.filter(
+          bookmaker => bookmaker.active === 0
+        )
+      } else if (this.value.name === this.groupFilter.active) {
+        return this.bookmakers.filter(
+          bookmaker => bookmaker.active !== 0
+        )
       } else {
-        return this.bookmakers.filter(bookmaker => bookmaker.name === this.value.name)
+        return this.bookmakers.filter(
+          bookmaker => bookmaker.name === this.value.name
+        )
       }
     },
     dragOptions () {
@@ -64,6 +95,29 @@ export default {
         disabled: false,
         ghostClass: 'ghost'
       }
+    }
+  },
+  methods: {
+    checkAll () {
+      // console.log(this.bookmakers)
+      this.bookmakers.forEach(bookmaker => {
+        bookmaker.checked = true
+      })
+    },
+    removeAll () {
+      // clear checkboxes
+    },
+    saveChanges () {
+      // save changes in JSON
+    },
+    moved () {
+      let order = 1
+      this.bookmakers.forEach(bookmaker => {
+        if (bookmaker.order) {
+          bookmaker.order = order
+          order++
+        }
+      })
     }
   }
 }

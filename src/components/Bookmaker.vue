@@ -3,7 +3,7 @@
     <div class="left">
       <span class="order">{{ bookmaker.order }}</span>
       <label class="check-holder">
-        <input type="checkbox" />
+        <input type="checkbox" v-model="bookmaker.checked"/>
         <span class="checkmark"></span>
       </label>
       <div class="logo-holder">
@@ -49,6 +49,9 @@ export default {
     bookmaker: {
       type: Object
     }
+  },
+  updated () {
+    console.log(this.bookmaker)
   },
   data () {
     return {
