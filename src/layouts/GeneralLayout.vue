@@ -29,44 +29,44 @@
 </template>
 
 <script>
-import Bookmaker from "@/components/Bookmaker";
-import bookmakersJSON from "@/assets/jsonData/bookies.json";
-import Multiselect from "vue-multiselect";
-import draggable from "vuedraggable";
+import Bookmaker from '@/components/Bookmaker'
+import bookmakersJSON from '@/assets/jsonData/bookies.json'
+import Multiselect from 'vue-multiselect'
+import draggable from 'vuedraggable'
 
 export default {
-  name: "transition-example-2",
-  display: "Transitions",
+  name: 'transition-example-2',
+  display: 'Transitions',
   components: {
     appBookmaker: Bookmaker,
     Multiselect,
     draggable
   },
-  data() {
+  data () {
     return {
       drag: false,
-      value: "",
+      value: '',
       bookmakers: bookmakersJSON
-    };
+    }
   },
   computed: {
-		filteredBookmakers () {
-			if (this.value === '') {
-				return this.bookmakers
-			} else {
-				return this.bookmakers.filter(bookmaker => bookmaker.name === this.value.name)
-			}
-		},
-    dragOptions() {
+    filteredBookmakers () {
+      if (this.value === '') {
+        return this.bookmakers
+      } else {
+        return this.bookmakers.filter(bookmaker => bookmaker.name === this.value.name)
+      }
+    },
+    dragOptions () {
       return {
         animation: 200,
-        group: "description",
+        group: 'description',
         disabled: false,
-        ghostClass: "ghost"
-      };
+        ghostClass: 'ghost'
+      }
     }
   }
-};
+}
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

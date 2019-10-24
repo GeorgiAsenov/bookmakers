@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import AdditionalLink from "@/components/AdditionalLink";
+import AdditionalLink from '@/components/AdditionalLink'
 
 export default {
   components: {
@@ -50,28 +50,28 @@ export default {
       type: Object
     }
   },
-  data() {
+  data () {
     return {
-			selectedAdditionalLinks: [],
-			additionalLinkId: 0
-    };
-	},
+      selectedAdditionalLinks: [],
+      additionalLinkId: 0
+    }
+  },
   methods: {
-		addMore() {
-			if (!this.bookmaker.links) {
-				return false
-			} else {
-				this.selectedAdditionalLinks.push({
-					id: this.additionalLinkId
-				});
-				this.additionalLinkId++
-			}
-		},
-    removeItem(indexIn) {
-      this.selectedAdditionalLinks.splice(indexIn, 1);
+    addMore () {
+      if (!this.bookmaker.links) {
+        return false
+      } else {
+        this.selectedAdditionalLinks.push({
+          id: this.additionalLinkId
+        })
+        this.additionalLinkId++
+      }
+    },
+    removeItem (indexIn) {
+      this.selectedAdditionalLinks.splice(indexIn, 1)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

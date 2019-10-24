@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import CountryData from "@/assets/jsonData/countries.json";
-import Multiselect from "vue-multiselect";
+import CountryData from '@/assets/jsonData/countries.json'
+import Multiselect from 'vue-multiselect'
 
 export default {
   components: {
@@ -37,27 +37,27 @@ export default {
       type: Number
     }
   },
-  data() {
+  data () {
     return {
-      value: "",
+      value: '',
       countries: CountryData
-    };
+    }
   },
   methods: {
-    removeLink() {
-      this.$emit("getRowIndex", this.indexIn);
+    removeLink () {
+      this.$emit('getRowIndex', this.indexIn)
     }
   },
   computed: {
-    countryCode() {
+    countryCode () {
       if (this.value.code) {
         return `${
           this.bookmaker.links.default
-        }/${this.value.code.toLowerCase()}`;
+        }/${this.value.code.toLowerCase()}`
       }
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
