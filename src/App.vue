@@ -9,12 +9,10 @@ import GeneralLayout from './layouts/GeneralLayout'
 
 export default {
   name: 'app',
-  components: {
-    generalLayout: GeneralLayout,
-  }  
+  components: { generalLayout: GeneralLayout }  
 }
 </script>
 
 <style lang="scss">
-@import "assets/styles/main.scss";
+  @import "assets/styles/main.scss";
 </style>
