@@ -125,6 +125,7 @@ export default {
         this.bookmakers = []
       } else {
         this.bookmakers = bookmakersJSON
+        this.moved()
       }    
     },
     moved () {
