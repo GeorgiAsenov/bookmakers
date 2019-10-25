@@ -29,8 +29,6 @@
         padding: .4rem 2rem .4rem 5rem;
         margin-left: 1rem;
         font-weight: 500;
-    }
-    &.check {
         .check {
             position: absolute;
             left: 23px;
@@ -42,7 +40,7 @@
             border-bottom: 2px solid $white;
             border-right: 2px solid $white;
         }
-    } 
+    }
     &.remove {
         .close {
             position: absolute;

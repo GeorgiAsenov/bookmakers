@@ -5,10 +5,11 @@
         width: 100%;
         margin-bottom: 1rem;
         align-items: flex-end;
+        justify-content: flex-end;
         .text-default {
             font-size: 1.5rem;
             font-weight: 600;
-            color: #616161;
+            color: $text-default;
             margin-right: 12px;
             width: 25%;
             text-align: right;
@@ -30,8 +31,8 @@
                 padding: 0 0 0 .5rem;
                 font-size: 1.5rem;
                 font-weight: 500;
-                color: #395669;
-                background-color: #d7dae4;
+                color: $link-color;
+                background-color: $link-background;
                 text-decoration: none;
                 border-top-left-radius: .4rem;
                 border-bottom-left-radius: .4rem;

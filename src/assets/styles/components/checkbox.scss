@@ -1,4 +1,3 @@
-/* Customize the label (the check-holder) */
 .check-holder {
     display: block;
     position: relative;
@@ -11,18 +10,35 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+      &:checked ~ .checkmark {
+        background-color: $white;
+        &:after {
+          display: block;
+        }
+      }
+    }
+    &:hover input ~ .checkmark {
+      box-shadow: 0px 0px 6px 0px $checkmark-box-shadow;
+    }
+    .checkmark:after {
+      left: 10px;
+      top: 1px;
+      width: 9px;
+      height: 19px;
+      border: solid $green-color;
+      border-width: 0 2px 2px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
   }
   
-  /* Hide the browser's default checkbox */
-  .check-holder input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-  
-  /* Create a custom checkbox */
   .checkmark {
     position: absolute;
     top: 0;
@@ -30,42 +46,11 @@
     height: 30px;
     width: 30px;
     background-color: $white;
-    border: 1px solid #E4E7F1;
+    border: 1px solid $checkmark-border;
     transition: all .3s ease;
-  }
-  
-  /* On mouse-over, add a grey background color */
-  .check-holder:hover input ~ .checkmark {
-    box-shadow: 0px 0px 6px 0px #b4e4f8;
-    // background-color: #ccc;
-  }
-  
-  /* When the checkbox is checked, add a blue background */
-  .check-holder input:checked ~ .checkmark {
-    background-color: $white;
-  }
-  
-  /* Create the checkmark/indicator (hidden when not checked) */
-  .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-  
-  /* Show the checkmark when checked */
-  .check-holder input:checked ~ .checkmark:after {
-    display: block;
-  }
-  
-  /* Style the checkmark/indicator */
-  .check-holder .checkmark:after {
-    left: 10px;
-    top: 1px;
-    width: 9px;
-    height: 19px;
-    border: solid #52BC01;
-    border-width: 0 2px 2px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+    &:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
   }

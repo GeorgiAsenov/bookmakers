@@ -1,17 +1,17 @@
 .add-more {
     width: 4rem;
     height: 100%;
-    background-color: #5BCB34;
+    background-color: $green-color;
     position: relative;
     cursor: pointer;
     transition: all .3s ease;
     &:hover {
-        background-color: rgb(49, 146, 17);
+        background-color: $green-color-hovered;
     }
     &:after, &:before {
         position: absolute;
         display: block;
-        background-color: #fff;
+        background-color: $white;
         z-index: 9;
         content: " ";
     }
@@ -30,9 +30,9 @@
         bottom: 10px;
     }
     &.close {
-        background-color: #E2002E;
+        background-color: $red-color;
         &:hover {
-            background-color: rgb(160, 0, 32);
+            background-color: $red-color-hovered;
         }
          &:after, &:before {
              transform: rotate(45deg);
@@ -42,7 +42,7 @@
         opacity: .5;
         cursor: no-drop;
         &:hover {
-            background-color: #5BCB34;
+            background-color: $green-color;
         }
     }
 }
