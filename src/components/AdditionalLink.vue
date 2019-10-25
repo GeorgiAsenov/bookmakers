@@ -14,7 +14,7 @@
         class="link"
         :href="`bookmaker.links.default`"
         v-if="bookmaker.links"
-        :placeholder="countryCode"
+        :value="countryCode"
       />
       <span class="add-more close" @click="removeLink"></span>
     </div>

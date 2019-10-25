@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <section class="options">
-      <button class="v-button save" @click="saveChanges">save</button>
+      <button class="v-button save">save</button>
       <div class="filter">
         <multiselect
           v-model="value"
@@ -12,13 +12,16 @@
           :reset-after="false"
           placeholder='Choose bookmaker'
           label="name"
+          :class="{'unclickable' : removedBookies}"
           >
         </multiselect>
-        <button class="v-button check" @click="checkAll">
+        <button :class="{'unclickable' : removedBookies}" class="v-button check" @click="checkAll">
           <span class="check"></span> check all
         </button>
         <button class="v-button remove" @click="removeAll">
-          <span class="close"></span> remove all
+          <span :class="{'close' : !removedBookies, 'check' : removedBookies}"></span> 
+          <span v-if="!removedBookies">remove</span>
+          <span v-else>add</span> &nbsp; all
         </button>
       </div>
     </section>
@@ -67,9 +70,10 @@ export default {
       drag: false,
       value: '',
       allSelections: [{ name: '--- SHOW ALL ---' }, { name: '--- SHOW ACTIVE ---' }, { name: '--- SHOW INACTIVE ---' }, ...bookmakersJSON],
-      bookmakers: bookmakersJSON
+      bookmakers: null,
+      removedBookies: false
     }
-  },
+	},
   computed: {
     filteredBookmakers () {
       if (this.value === '' || this.value.name === this.groupFilter.all) {
@@ -96,19 +100,31 @@ export default {
         ghostClass: 'ghost'
       }
     }
-  },
+	},
+	created () {
+    for (const el in bookmakersJSON) {
+      let bookieCopy = {
+        ...bookmakersJSON[el],
+        checked: false
+      }
+      this.$set(bookmakersJSON, el, bookieCopy)
+    }
+    this.bookmakers = [...bookmakersJSON]
+	},
   methods: {
     checkAll () {
-      // console.log(this.bookmakers)
       this.bookmakers.forEach(bookmaker => {
-        bookmaker.checked = true
+        if (bookmaker.active !== 0) {
+          bookmaker.checked = true
+        }
       })
     },
     removeAll () {
-      // clear checkboxes
-    },
-    saveChanges () {
-      // save changes in JSON
+      this.removedBookies = !this.removedBookies
+      this.removedBookies
+        ? this.bookmakers = null
+        : this.bookmakers = bookmakersJSON
+
     },
     moved () {
       let order = 1
@@ -133,24 +149,8 @@ export default {
       display: flex;
     }
   }
-  .flip-list-move {
-    transition: transform 0.5s;
-  }
-  .no-move {
-    transition: transform 0s;
-  }
-  .ghost {
-    opacity: 0.5;
-    background: #c8ebfb;
-  }
-  .list-group {
-    min-height: 20px;
-  }
-  .list-group-item {
-    cursor: move;
-  }
-  .list-group-item i {
-    cursor: pointer;
+  .unclickable {
+    pointer-events: none;
   }
 }
 </style>

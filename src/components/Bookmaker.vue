@@ -14,14 +14,15 @@
     <div class="right">
       <div class="link-holder">
         <div class="default">
-          <span class="text-default">Default:</span>
+          <span v-if="bookmaker.links" class="text-default">Default:</span>
           <div class="holder">
             <input
               type="text"
+              spellcheck="false"
               class="link"
               :href="`bookmaker.links.default`"
               v-if="bookmaker.links"
-              :placeholder="bookmaker.links.default"
+              :value="bookmaker.links.default"
             />
             <span :class="{'disabled' : !bookmaker.links}" class="add-more" @click="addMore"></span>
           </div>
@@ -40,6 +41,7 @@
 
 <script>
 import AdditionalLink from '@/components/AdditionalLink'
+import { setInterval } from 'timers'
 
 export default {
   components: {
@@ -49,16 +51,13 @@ export default {
     bookmaker: {
       type: Object
     }
-  },
-  updated () {
-    console.log(this.bookmaker)
-  },
+	},
   data () {
     return {
       selectedAdditionalLinks: [],
       additionalLinkId: 0
     }
-  },
+	},
   methods: {
     addMore () {
       if (!this.bookmaker.links) {
@@ -94,7 +93,7 @@ export default {
   }
   .left {
     .order {
-      font-size: 1.5rem;
+			font-size: 1.5rem;
     }
     display: flex;
     align-items: center;
