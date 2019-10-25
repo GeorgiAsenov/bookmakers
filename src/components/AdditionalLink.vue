@@ -63,19 +63,3 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/styles/components/link-holder.scss";
 </style>
-
-<style lang="scss">
-.multiselect {
-  .multiselect__tags {
-    .multiselect__single {
-      white-space: nowrap;
-      font-size: 1.4rem;
-      .multiselect__option--highlight {
-        background: red !important;
-        outline: none;
-        color: #fff;
-      }
-    }
-  }
-}
-</style>

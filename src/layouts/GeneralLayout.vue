@@ -70,7 +70,7 @@ export default {
       drag: false,
       value: '',
       allSelections: [{ name: '--- SHOW ALL ---' }, { name: '--- SHOW ACTIVE ---' }, { name: '--- SHOW INACTIVE ---' }, ...bookmakersJSON],
-      bookmakers: null,
+      bookmakers: [],
       removedBookies: false
     }
 	},
@@ -121,10 +121,11 @@ export default {
     },
     removeAll () {
       this.removedBookies = !this.removedBookies
-      this.removedBookies
-        ? this.bookmakers = null
-        : this.bookmakers = bookmakersJSON
-
+      if (this.removedBookies) {
+        this.bookmakers = []
+      } else {
+        this.bookmakers = bookmakersJSON
+      }    
     },
     moved () {
       let order = 1
