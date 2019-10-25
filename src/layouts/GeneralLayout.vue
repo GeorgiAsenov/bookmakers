@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <section class="options">
-      <button class="v-button save">save</button>
+      <button class="v-button save" @click="sendUpdatedBookmakers">save</button>
       <div class="filter">
         <multiselect
           v-model="value"
@@ -112,6 +112,15 @@ export default {
     this.bookmakers = [...bookmakersJSON]
 	},
   methods: {
+    sendUpdatedBookmakers() {
+      this.$api.post('http://http://localhost:8080/', {
+        updatedBookies: this.bookmakers
+      }).then((response) => {
+        console.log(response)
+      }).catch((error) => {
+        console.log(error)
+      })
+    },
     checkAll () {
       this.bookmakers.forEach(bookmaker => {
         if (bookmaker.active !== 0) {
