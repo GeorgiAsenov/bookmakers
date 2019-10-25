@@ -83,7 +83,7 @@ export default {
   display: flex;
   justify-content: space-between;
   padding-top: 1rem;
-  border-bottom: 1px solid #d7dae4;
+  border-bottom: 1px solid $link-background;
   cursor: grab;
   &:active {
     cursor: grabbing;
@@ -105,7 +105,7 @@ export default {
         text-align: center;
         margin-top: 1rem;
         font-size: 1.5rem;
-        color: #616161;
+        color: $text-default;
         margin-bottom: 12px;
       }
     }
